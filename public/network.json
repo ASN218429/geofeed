@@ -20,7 +20,7 @@
     "networks": [
       {
         "asn": 209874,
-        "name": "NovaCloud-Hosting / Tech Tide",
+        "name": "Tech Tide",
         "url": "https://as209874.net"
       },
       {
@@ -48,11 +48,18 @@
     }
   ],
   "protection": {
+    "service": "AS218429 DDoS protection",
     "provider": "PletX",
-    "upstream_published_capacity_tbps": 8,
+    "mitigation_capacity_tbps": 8,
     "capacity_qualifier": "more than",
-    "scope": "upstream provider capacity, not dedicated capacity",
-    "source": "https://novacloud-hosting.com/ddos-protection"
+    "capabilities": [
+      "Symmetric inbound and outbound filtering",
+      "XDP/eBPF fast-path filtering",
+      "Game-aware filters",
+      "Automatic port learning",
+      "Query proxies",
+      "Protocol validation"
+    ]
   },
   "geofeed": {
     "url": "https://cdn.as218429.net/geofeed.csv",
