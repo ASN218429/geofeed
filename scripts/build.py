@@ -6,6 +6,7 @@ import hashlib
 import io
 import ipaddress
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -20,13 +21,15 @@ def validate_locations(locations, prefixes):
             raise ValueError(f"Prefix outside the announced inventory: {prefix}")
         if not isinstance(location, dict):
             raise ValueError(f"Location must be an object: {prefix}")
+        if any(not isinstance(v, str) for v in location.values()):
+            raise ValueError(f"Location fields must be strings: {prefix}")
         country = location.get("country", "").upper()
         # ISO 3166-1 country codes; EU is a registry marker, not a country.
         codes = set((ROOT / "data/country-codes.txt").read_text().split())
         if country not in codes:
             raise ValueError(f"Use an ISO 3166-1 country code for {prefix}")
         region = location.get("region", "")
-        if region and not region.startswith(country + "-"):
+        if region and not re.fullmatch(re.escape(country) + r"-[A-Z0-9]{1,3}", region):
             raise ValueError(f"Region must start with {country}- for {prefix}")
         fields = [str(net), country, region, location.get("city", ""), location.get("postal_code", "")]
         if any(not isinstance(v, str) or any(c in v for c in "\r\n#") for v in fields):

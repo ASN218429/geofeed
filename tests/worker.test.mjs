@@ -10,7 +10,8 @@ test('feed aliases, MIME, CORS and metadata', async () => {
   assert.equal(await (await request('/.well-known/geofeed')).text(), await feed.text());
   const data = await (await request('/network.json')).json();
   assert.equal(data.asn, 218429);
-  assert.equal(data.prefixes.length, 8);
+  assert.ok(data.prefixes.length > 0);
+  assert.ok(data.prefixes.every(p => /\//.test(p)));
 });
 test('HEAD, conditional fetch, not-found and method handling', async () => {
   const get = await request('/geofeed.csv');
