@@ -38,9 +38,34 @@ def validate_locations(locations, prefixes):
     return sorted(rows, key=lambda r: (ipaddress.ip_network(r[0]).version, int(ipaddress.ip_network(r[0]).network_address), ipaddress.ip_network(r[0]).prefixlen))
 
 
+def validate_segments(segments, prefixes):
+    """A saved editor plan is a partition, not additional BGP announcements."""
+    if not isinstance(segments, list) or any(not isinstance(p, str) for p in segments):
+        raise ValueError("Segments must be an array of CIDR strings")
+    if not segments:
+        return
+    parents = [ipaddress.ip_network(p, strict=True) for p in prefixes]
+    children = [ipaddress.ip_network(p, strict=True) for p in segments]
+    if len(children) > 16384:
+        raise ValueError("Segment plan exceeds 16,384 rows")
+    for child in children:
+        if not any(child.version == parent.version and child.subnet_of(parent) for parent in parents):
+            raise ValueError(f"Segment outside announced inventory: {child}")
+    for family in (4, 6):
+        group = sorted((n for n in children if n.version == family), key=lambda n: (int(n.network_address), n.prefixlen))
+        if any(a.overlaps(b) for a, b in zip(group, group[1:])):
+            raise ValueError("Saved segments overlap")
+        expected = list(ipaddress.collapse_addresses(n for n in parents if n.version == family))
+        if list(ipaddress.collapse_addresses(group)) != expected:
+            raise ValueError("Saved segments must cover the announced inventory without gaps")
+
+
 def build():
     network = json.loads((ROOT / "data/network.json").read_text())
     locations = json.loads((ROOT / "data/locations.json").read_text())
+    segments_path = ROOT / "data/segments.json"
+    if segments_path.exists():
+        validate_segments(json.loads(segments_path.read_text()), network["prefixes"])
     rows = validate_locations(locations, network["prefixes"])
     stream = io.StringIO(newline="")
     stream.write("# AS218429 geofeed (RFC 8805)\r\n")

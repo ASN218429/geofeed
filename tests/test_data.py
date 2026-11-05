@@ -21,6 +21,12 @@ class Validation(unittest.TestCase):
         self.assertEqual(build.validate_locations({}, ["2a14:7582:d000::/36"]), [])
         self.assertEqual(len(build.validate_locations({"2a14:7582:d001::/48": {"country": "NL"}}, ["2a14:7582:d000::/36"])), 1)
 
+    def test_subprefix_segment_plan(self):
+        build.validate_segments(["165.217.165.0/25", "165.217.165.128/25"], ["165.217.165.0/24"])
+        for segments in [["165.217.165.0/25"], ["165.217.165.0/24", "165.217.165.0/25"], ["8.8.8.0/24"]]:
+            with self.subTest(segments=segments), self.assertRaises(ValueError):
+                build.validate_segments(segments, ["165.217.165.0/24"])
+
 
 if __name__ == "__main__":
     unittest.main()

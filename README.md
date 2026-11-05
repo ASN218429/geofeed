@@ -4,7 +4,7 @@ Public data at https://cdn.as218429.net, hosted by the `as218429-cdn` Cloudflare
 
 ## Data maintenance
 
-`data/network.json` holds the observed prefix inventory and network metadata. `data/locations.json` holds ONLY operator-confirmed prefix locations. No location claims were inferred for initial setup: the first geofeed is comments-only, and metadata reports `awaiting_operator_locations`. Use [syncgeo](https://github.com/ASN218429/scripts) to add locations safely and publish them.
+`data/network.json` holds the observed prefix inventory and network metadata. `data/locations.json` holds ONLY operator-confirmed prefix locations. `data/segments.json` stores the editor’s optional full partition into smaller blocks; it does not change BGP announcements. Empty segments means the original announced inventory. No location claims were inferred for initial setup: the first geofeed is comments-only, and metadata reports `awaiting_operator_locations`. Use [syncgeo](https://github.com/ASN218429/scripts) to add locations safely and publish them.
 
 RFC 8805 CSV has exactly five columns, UTF-8 and CRLF, no header row. Unknown locations are omitted. Aliases `/geofeed/as218429.csv` and `/.well-known/geofeed` serve the same content. Other endpoints: `/network.json`, `/prefixes.json`, `/.well-known/security.txt` and `/` (JSON resource index). Responses include CORS, ETag/304, HEAD, a five-minute cache TTL, appropriate MIME and a real 404 for missing files. The security.txt expiry needs renewal before 2027-05-01.
 
@@ -37,3 +37,7 @@ python3 scripts/deploy.py
 ## Rollback
 
 Revert the unwanted Git commit and push main, or redeploy a reviewed earlier commit with the same build/deploy steps. Preserve current data mappings when rolling back unrelated code. Never reset a dirty operator checkout.
+
+## Smaller location blocks
+
+Use syncgeo’s split editor to partition a /24 into two /25s or four /26s, then assign each child independently. The generated feed publishes those location prefixes; no subnet split changes routing or RIPE assignments. Full partitions are checked for gaps, overlaps and bounds, and CSV rows are allowed only inside the announced inventory. More-specific location overrides remain supported.
