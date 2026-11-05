@@ -56,7 +56,7 @@
   },
   "geofeed": {
     "url": "https://cdn.as218429.net/geofeed.csv",
-    "entries": 0,
-    "status": "awaiting_operator_locations"
+    "entries": 8,
+    "status": "published"
   }
 }

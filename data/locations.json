@@ -1,1 +1,50 @@
-{}
+{
+  "165.217.164.0/24": {
+    "country": "DE",
+    "region": "DE-HE",
+    "city": "Frankfurt am Main",
+    "postal_code": "60489"
+  },
+  "165.217.165.0/24": {
+    "country": "DE",
+    "region": "DE-HE",
+    "city": "Frankfurt am Main",
+    "postal_code": "60489"
+  },
+  "2a14:7580:fff8::/48": {
+    "country": "DE",
+    "region": "DE-HE",
+    "city": "Frankfurt am Main",
+    "postal_code": "60489"
+  },
+  "2a14:7582:d000::/36": {
+    "country": "GR",
+    "region": "GR-I",
+    "city": "Athens",
+    "postal_code": "11635"
+  },
+  "2a14:7582:e000::/36": {
+    "country": "GR",
+    "region": "GR-I",
+    "city": "Athens",
+    "postal_code": "11635"
+  },
+  "2a14:7583:8200::/40": {
+    "country": "GR",
+    "region": "GR-I",
+    "city": "Athens",
+    "postal_code": "11635"
+  },
+  "2a14:7583:8300::/40": {
+    "country": "DE",
+    "region": "DE-HE",
+    "city": "Frankfurt am Main",
+    "postal_code": "60489"
+  },
+  "2a14:7583:8400::/40": {
+    "country": "DE",
+    "region": "DE-HE",
+    "city": "Frankfurt am Main",
+    "postal_code": "60489"
+  }
+}
