@@ -1,0 +1,9 @@
+{
+  "asn": 218429,
+  "resources": [
+    "/geofeed.csv",
+    "/network.json",
+    "/prefixes.json",
+    "/.well-known/security.txt"
+  ]
+}

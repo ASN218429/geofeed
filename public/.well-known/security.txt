@@ -1,0 +1,4 @@
+Contact: mailto:gvol@nexusystems.org
+Expires: 2027-05-01T00:00:00Z
+Preferred-Languages: en
+Canonical: https://cdn.as218429.net/.well-known/security.txt

@@ -1,0 +1,57 @@
+{
+  "asn": 218429,
+  "name": "GL-AS",
+  "observed_at": "2026-11-05T08:00:00Z",
+  "prefix_source": "https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS218429",
+  "prefixes": [
+    "165.217.164.0/24",
+    "165.217.165.0/24",
+    "2a14:7580:fff8::/48",
+    "2a14:7582:d000::/36",
+    "2a14:7582:e000::/36",
+    "2a14:7583:8200::/40",
+    "2a14:7583:8300::/40",
+    "2a14:7583:8400::/40"
+  ],
+  "contact": "gvol@nexusystems.org",
+  "upstreams": {
+    "source": "https://rest.db.ripe.net/ripe/aut-num/AS218429.json",
+    "type": "registered routing policy",
+    "networks": [
+      {
+        "asn": 209874,
+        "name": "NovaCloud-Hosting / Tech Tide",
+        "url": "https://as209874.net"
+      },
+      {
+        "asn": 49581,
+        "name": "Tube-Hosting",
+        "url": "https://as49581.net"
+      }
+    ]
+  },
+  "brands": [
+    {
+      "name": "Ruxora",
+      "url": "https://ruxora.org/",
+      "relationship": [
+        "hosting infrastructure",
+        "backbone connectivity"
+      ]
+    },
+    {
+      "name": "GaleniusNodes",
+      "url": "https://galeniusnodes.com/",
+      "relationship": [
+        "backbone connectivity"
+      ]
+    }
+  ],
+  "protection": {
+    "provider": "PletX",
+    "upstream_published_capacity_tbps": 8,
+    "capacity_qualifier": "more than",
+    "scope": "upstream provider capacity, not dedicated capacity",
+    "source": "https://novacloud-hosting.com/ddos-protection"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "as218429-cdn",
+  "compatibility_date": "2026-11-05",
+  "hostname": "cdn.as218429.net",
+  "account_id": "6c9df7c384eac81d15322ab7a02e753e",
+  "zone_id": "0cf431a2f287d5d979213abb5692cf35",
+  "observability": {"enabled": true, "traces": {"enabled": true}}
+}
